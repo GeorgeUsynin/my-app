@@ -1,13 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { createContext } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import Todo from "./store/todo-store";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+export const Context = createContext();
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Context.Provider value={new Todo()}>
+      <App />
+    </Context.Provider>
   </React.StrictMode>
 );
 

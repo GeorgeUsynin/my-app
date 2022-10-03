@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Post from "./components/Post";
+import Portal from "./components/Portal";
+import NewPostModal from "./components/NewPostModal";
+import { observer } from "mobx-react-lite";
+import { Context } from "./index";
+import "./App.css";
 
 function App() {
+  const [is_open, setIsOpen] = React.useState(false);
+
+  const { posts } = React.useContext(Context);
+
+  const mapped_posts = posts.map(({ id, title, description }) => {
+    return <Post key={id} title={title} description={description} />;
+  });
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        <button onClick={openModal}>Add new post</button>
+      </div>
+      <div className="App">{mapped_posts}</div>
+      <Portal>
+        <NewPostModal is_open={is_open} />
+      </Portal>
     </div>
   );
 }
 
-export default App;
+export default observer(App);
