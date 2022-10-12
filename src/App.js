@@ -1,37 +1,21 @@
 import React from "react";
-import Post from "./components/Post";
-import Portal from "./components/Portal";
-import NewPostModal from "./components/NewPostModal";
+import AddUser from "./components/AddUser";
+import UserList from "./components/UserList";
 import { observer } from "mobx-react-lite";
-import { Context } from "./index";
 import "./App.css";
 
 function App() {
-  const [is_open, setIsOpen] = React.useState(false);
 
-  const { posts } = React.useContext(Context);
+  const [users, setUsers] = React.useState([]);
 
-  const mapped_posts = posts.map(({ id, title, description }) => {
-    return <Post key={id} title={title} description={description} />;
-  });
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
+  const createNewUser = (user) => {
+    setUsers(prevUsers => ([{name: user.name, age: user.age, id: Math.random().toString()}, ...prevUsers]));
   };
 
   return (
     <div>
-      <div>
-        <button onClick={openModal}>Add new post</button>
-      </div>
-      <div className="App">{mapped_posts}</div>
-      <Portal>
-        <NewPostModal is_open={is_open} />
-      </Portal>
+      <AddUser createNewUser={createNewUser}/>
+      <UserList items={users} />
     </div>
   );
 }
