@@ -2,8 +2,11 @@ import React from "react";
 import AddUser from "./components/AddUser";
 import UserList from "./components/UserList";
 import "./App.css";
+import { useStore } from './index'
 
 function App() {
+
+  const {title, description} = useStore();
 
   const userNameInputRef = React.useRef();
 
@@ -21,6 +24,7 @@ function App() {
     <div>
       <AddUser createNewUser={createNewUser} ref={userNameInputRef}/>
       <UserList items={users} />
+      <p>{title}{description}</p>
       <button onClick={addFocusOnUserName}>Click</button>
     </div>
   );

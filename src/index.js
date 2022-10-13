@@ -3,16 +3,31 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Todo from "./store/todo-store";
 
-export const Context = createContext();
+export const Context = createContext({
+  title: '',
+  description: '',
+});
+
+export const useStore = () => {
+
+  const store = React.useContext(Context)
+
+  return store;
+}
+
+const MyProvider = ({store, children}) => {
+  return <Context.Provider value={store}>
+    {children}
+  </Context.Provider>
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Context.Provider value={new Todo()}>
+    <MyProvider store={{ title: 'Hello', description: 'World' }}>
       <App />
-    </Context.Provider>
+    </MyProvider>
   </React.StrictMode>
 );
 
