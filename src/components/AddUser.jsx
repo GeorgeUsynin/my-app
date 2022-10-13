@@ -1,6 +1,10 @@
 import React from 'react';
 
-const AddUser = ({createNewUser}) => {
+const AddUser = React.forwardRef(({createNewUser}, ref) => {
+
+    const userNameInputRef = React.useRef();
+
+    React.useImperativeHandle(ref, ()=>({activate}))
 
     const [user_name, setUserName] = React.useState('')
     const [user_age, setUserAge] = React.useState('')
@@ -20,12 +24,16 @@ const AddUser = ({createNewUser}) => {
         setUserAge('');
     };
 
+    const activate = () => {
+        userNameInputRef.current.focus();
+    }
+
 
     return (
         <form onSubmit={addUserHandler}> 
             <div>
                 <label htmlFor='userName'>
-                    <input type='text' id='userName' value={user_name} onChange={changeUserNameHandler}/>
+                    <input type='text' id='userName' value={user_name} onChange={changeUserNameHandler} ref={userNameInputRef}/>
                 </label>
             </div>
             <div>
@@ -38,6 +46,6 @@ const AddUser = ({createNewUser}) => {
             </div>
         </form>
     )
-};
+});
 
 export default AddUser;

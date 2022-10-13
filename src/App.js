@@ -1,10 +1,11 @@
 import React from "react";
 import AddUser from "./components/AddUser";
 import UserList from "./components/UserList";
-import { observer } from "mobx-react-lite";
 import "./App.css";
 
 function App() {
+
+  const userNameInputRef = React.useRef();
 
   const [users, setUsers] = React.useState([]);
 
@@ -12,12 +13,17 @@ function App() {
     setUsers(prevUsers => ([{name: user.name, age: user.age, id: Math.random().toString()}, ...prevUsers]));
   };
 
+  const addFocusOnUserName = () => {
+    userNameInputRef.current.activate();
+  }
+
   return (
     <div>
-      <AddUser createNewUser={createNewUser}/>
+      <AddUser createNewUser={createNewUser} ref={userNameInputRef}/>
       <UserList items={users} />
+      <button onClick={addFocusOnUserName}>Click</button>
     </div>
   );
 }
 
-export default observer(App);
+export default App;
