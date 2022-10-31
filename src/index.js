@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -18,11 +18,11 @@ const MyProvider = ({ store, children }) => {
     return <Context.Provider value={store}>{children}</Context.Provider>;
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
     <MyProvider store={{ title: 'Hello', description: 'World' }}>
         <App />
-    </MyProvider>
+    </MyProvider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
