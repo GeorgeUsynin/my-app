@@ -1,0 +1,34 @@
+.modal-root {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9998;
+    display: none;
+    overflow: hidden;
+    opacity: 0;
+    background-color: grey;
+}
+
+.modal-root:not(:empty) {
+    display: flex;
+    opacity: 1;
+}
+
+.modal{
+    width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 30px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+}

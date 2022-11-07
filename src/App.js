@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './App.css';
-import Tabs, { Tab } from './components/Tabs';
+import Modal from './components/Modal';
 
 const App = () => {
+    const modalRef = useRef(null);
+
+    const onOpen = () => {
+        modalRef.current.open();
+    };
+
+    const onClsoe = () => {
+        modalRef.current.hide();
+    };
+
     return (
         <div>
-            <Tabs>
-                <Tab title='First tab' content='Hello World' />
-                <Tab title='Second tab' content='Hello World 2' />
-                <Tab title='Third tab' content='Hello World 3' />
-            </Tabs>
+            <Modal ref={modalRef}>
+                <Modal.Header title='Hello World' />
+                <Modal.Body description='Гравировка клавиатур ноутбука Apple macbook Air всех моделей и всех годов производства сверхмощным диодным заводским лазером в течении 5 минут. Качество 100% оригинальных букв.https://pk.by/index.pl?act=PRODUCT&id=6880' />
+                <Modal.Footer footer='George' />
+            </Modal>
+            <div>
+                <button onClick={onOpen}>Open modal</button>
+                <button onClick={onClsoe}>Close modal</button>
+            </div>
         </div>
     );
 };
