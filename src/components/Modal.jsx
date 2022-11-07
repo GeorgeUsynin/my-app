@@ -23,7 +23,12 @@ const Modal = forwardRef(({ children }, ref) => {
 });
 
 const Header = ({ title }) => {
-    return <header>{title}</header>;
+    return (
+        <header>
+            {title}
+            <span onClick={setIsModalVisible(false)}>x</span>
+        </header>
+    );
 };
 
 const Body = ({ description }) => {
