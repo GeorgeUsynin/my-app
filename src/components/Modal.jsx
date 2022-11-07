@@ -26,7 +26,7 @@ const Header = ({ title }) => {
     return (
         <header>
             {title}
-            <span onClick={setIsModalVisible(false)}>x</span>
+            <span onClick={() => setIsModalVisible(false)}>x</span>
         </header>
     );
 };
